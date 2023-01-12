@@ -1,0 +1,38 @@
+version: "3.3"
+services:
+
+   api:
+      build: .
+      ports:
+        - 8000:8000
+      restart: always
+      depends_on:
+        - postgres
+      networks:
+        - postgresnetwork
+      environment:
+        POSTGRES_DB: ""
+        POSTGRES_USER: ""
+        POSTGRES_PASSWORD: ""
+      command: >
+        sh -c "
+              python ./test-django-001/manage.py migrate &&
+              python ./test-django-001/manage.py runserver 0.0.0.0:8000"
+
+   postgres:
+      image: postgres
+      restart: always
+      networks:
+         - postgresnetwork
+      environment:
+         POSTGRES_DB: ""
+         POSTGRES_USER: ""
+         POSTGRES_PASSWORD: ""
+      volumes:
+         - ./the_DB:/data/db
+      ports:
+         - "5432:5432"
+      
+networks:
+  postgresnetwork:
+    driver: bridge
