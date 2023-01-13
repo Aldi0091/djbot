@@ -1,3 +1,3 @@
 WELCOME_MESSAGE = """
-SALAM SAKHA!!
+hello world
 """

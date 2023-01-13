@@ -6,7 +6,6 @@ from .models import Message, User, Receiver
 from django.core.exceptions import ValidationError
 
 
-
 class MessageSerializator(serializers.ModelSerializer):
     message = serializers.CharField()
     class Meta:
@@ -16,9 +15,10 @@ class MessageSerializator(serializers.ModelSerializer):
 
 class ReceiverSerializer(serializers.ModelSerializer):
     receiver = serializers.CharField()
+    user_token = serializers.CharField()
     class Meta:
         model = Receiver
-        fields = ['receiver']
+        fields = ['receiver', 'user_token']
 
 
 class UserSerializer(serializers.ModelSerializer):

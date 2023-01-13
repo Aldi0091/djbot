@@ -9,6 +9,7 @@ class Message(models.Model):
 
 class Receiver(models.Model):
     receiver = models.CharField(verbose_name="Receiver", max_length=200)
+    user_token = models.CharField(verbose_name="UserToken", max_length=200, null=True)
     def __str__(self) -> str:
         return super().__str__()
 
@@ -19,8 +20,9 @@ class User(models.Model):
     password = models.CharField(max_length=50)
     ifLogged = models.BooleanField(default=False)
     token = models.CharField(max_length=500, null=True, default="")
+    telegram_id = models.BigIntegerField(blank=True, null=True)
 
     def __str__(self):
-        return "{} -{}".format(self.login, self.name)
+        return "{}".format(self.telegram_id)
 
 
